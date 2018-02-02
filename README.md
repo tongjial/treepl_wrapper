@@ -6,6 +6,9 @@ Three steps in one run
 2. then perform cross validation and find the smallest cv score
 3. finally, time tree will be generated using the corresponding smooth value
 
+## Prerequisite
+* [TreePL](https://github.com/blackrim/treePL)
+
 ## Usage
 ```
 chmod 755 treepl_wrapper.sh
