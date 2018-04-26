@@ -19,9 +19,12 @@ Make sure treePL in your environment and treefile must be a single rooted tree
 Configuration file example
 ```
 numsites = 2882628
-mrca = nodename taxa1 taxa2
-min = nodename 48.60
-max = nodename 83.60
+mrca = nodename1 taxa1 taxa2
+min = nodename1 48.60
+max = nodename1 83.60
+mrca = nodename2 taxa3 taxa4
+min = nodename2 24.10
+max = nodename2 51.70
 nthreads = 2
 ```
 
