@@ -89,6 +89,10 @@ sed 's/[()]//g;s/^/smoothing = /' \
 
 treePL configure\_smooth\_$3
 
+# clean temporary files
+
+# rm configure\_cv\_$3 configure\_prime\_$3 configure\_smooth\_$3 cv\_$3 out_dates.tre out_dates.tre.r8s prime\_$3
+
 echo -e "================================================================"
 echo -e "running finished, please check the result and report the bugs"
 date
