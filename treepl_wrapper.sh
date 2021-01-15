@@ -16,6 +16,7 @@ if [ -f $1 ] && [ -f $2 ]
 then
 	echo -e "================================================================"
 	date
+	echo -e "treepl_wrapper.sh $1 $2 $3"
 	echo -e "start running, good luck!"
 	echo -e "================================================================"
 else
@@ -24,15 +25,13 @@ else
 	exit 2
 fi
 
-echo -e "treepl_wrapper.sh $1 $2 $3"
-
-# generate the prime configure file
+echo "Step1: generate the prime configure file"
 
 cat $1 |\
 awk 'BEGIN{print "treefile = '$2'"}{print}END{print "thorough\nprime"}' \
 > configure\_prime\_$3
 
-# run primes
+echo "Step2: run primes 100 times"
 
 for num in $(seq 100)
 do treePL configure\_prime\_$3 |\
@@ -42,14 +41,14 @@ sed ':a;N;$!ba;s/\n/ /g' \
 >> prime\_$3
 done
 
-# generate the cv configure file
+echo "Step3: generate the cv configure file"
 
 cat configure\_prime\_$3 |\
 sed 's/^prime/#&/' |\
 awk '{print}END{print "cv\ncvoutfile = cv_'$3'\ncvstart = 0.0001\ncvstop = 10000"}' \
 > configure\_cv\_$3
 
-# chose the most frequent cv optimal parameters
+echo "Step4: chose the most frequent cv optimal parameters"
 
 sort prime\_$3 | uniq -c | sort -nr | sed q | sed 's/^[ \t]*//' |\
 
@@ -66,18 +65,23 @@ sed '4s/d/moredetailad/' |\
 sed '5s/^/optcvad = &/' |\
 sed '6s/d/moredetailcvad/' >> configure\_cv\_$3
 
-# perform cross validation
+echo "Step5: perform cross validation, may wait a long time"
 
-treePL configure\_cv\_$3
+treePL configure\_cv\_$3 > cv\_$3.log 2>&1
 
-# generate the smooth configure file
+if [ -f cv\_$3 ]
+then 
+	echo "Step6: generate the smooth configure file"
+else
+	exit 3
+fi
 
 cat configure\_cv\_$3 |\
 sed 's/^cv/#&/' |\
 awk '{print}END{print "outfile = treepl_'$3'.tre"}' \
 > configure\_smooth\_$3
 
-# find the smallest cv score
+echo "Step7: find the smallest cv score"
 
 cat cv\_$3 |\
 awk '{printf "%f\t%s\n",$3,$2}' |\
@@ -85,9 +89,9 @@ sort -n | sed q | awk '{print $2}' |\
 sed 's/[()]//g;s/^/smoothing = /' \
 >> configure\_smooth\_$3
 
-# the last step
+echo "Step8: the last step"
 
-treePL configure\_smooth\_$3
+treePL configure\_smooth\_$3 > final\_$3.log 2>&1
 
 # clean temporary files
 
