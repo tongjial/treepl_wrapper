@@ -1,5 +1,5 @@
 # TreePL_wrapper
-A automatic pipeline for estimating time tree using TreePL.
+An automatic pipeline for estimating time tree using TreePL.
 
 This script includes three steps in one run
 1. Conduct the prime step 100 times to choose the most frequent cv optimal parameter;
