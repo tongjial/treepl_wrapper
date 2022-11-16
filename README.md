@@ -1,4 +1,4 @@
-# Treepl_wrapper
+# TreePL_wrapper
 A simple TreePL script for automatically estimating time tree.
 
 This script includes three steps in one run
