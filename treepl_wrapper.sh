@@ -95,7 +95,7 @@ treePL configure\_smooth\_$3 > final\_$3.log 2>&1
 
 # clean temporary files
 
-# rm configure\_cv\_$3 configure\_prime\_$3 configure\_smooth\_$3 cv\_$3 out_dates.tre out_dates.tre.r8s prime\_$3
+rm configure\_cv\_$3 configure\_prime\_$3 configure\_smooth\_$3 cv\_$3 out_dates.tre out_dates.tre.r8s prime\_$3
 
 echo -e "================================================================"
 echo -e "running finished, please check the result and report the bugs"
