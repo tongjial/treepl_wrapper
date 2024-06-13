@@ -31,7 +31,7 @@ max = nodename2 51.70
 nthreads = 8
 ```
 Note: 
-The mrca calibration nodes should select the highly supported ones. 
+The mrca calibration nodes should only select the highly supported ones. 
 Given all descendent names of each mrca in configure file is recommended.
 
 ## Reference
