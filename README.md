@@ -14,7 +14,10 @@ This script includes three steps in one run
 chmod 755 treepl_wrapper.sh
 ./treepl_wrapper.sh configuration treefile label
 ```
-Make sure treePL in your environment and treefile must be a single rooted tree
+Make sure treePL in your environment and treefile must be a single rooted tree.
+This tree should be a best ML tree with meaningful branch length (substitutions per site per year).
+Of cource, you can also use a bunch of bootstrap trees to obtain confidence interval.
+A better way is to concatenate the best ML tree and bootstrap trees into a single file, and list the best ML tree first.
 
 Configuration file example
 ```
@@ -25,8 +28,11 @@ max = nodename1 83.60
 mrca = nodename2 taxa3 taxa4
 min = nodename2 24.10
 max = nodename2 51.70
-nthreads = 2
+nthreads = 8
 ```
+Note: 
+The mrca calibration nodes should select the highly supported ones. 
+Given all descendent names of each mrca in configure file is recommended.
 
 ## Reference
 Smith, S.A. and O’Meara, B.C., 2012. treePL: divergence time estimation using penalized likelihood for large phylogenies. Bioinformatics, 28(20), pp.2689-2690.
