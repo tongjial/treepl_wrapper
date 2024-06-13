@@ -2,7 +2,7 @@
 An automatic pipeline for estimating time tree using TreePL.
 
 This script includes three steps in one run
-1. Conduct the prime step 100 times to choose the most frequent cv optimal parameter;
+1. Conduct the prime step 100 times to obtain the most frequent cv optimal parameters;
 2. Perform cross validation and find the smooth value with the smallest cv score;
 3. Generate the time tree using the optimized smooth value.
 
