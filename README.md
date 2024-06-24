@@ -1,10 +1,10 @@
 # TreePL_wrapper
-An automatic pipeline for estimating time tree using TreePL.
+An automatic pipeline for estimating time trees using TreePL.
 
-This script includes three steps in one run
-1. Conduct the prime step 100 times to obtain the most frequent cv optimal parameters;
-2. Perform cross validation and find the smooth value with the smallest cv score;
-3. Generate the time tree using the optimized smooth value.
+This script includes three steps in a single run:
+1. Conduct the prime step 100 times to obtain the most frequently occurring optimal cross-validation (cv) parameters;
+2. Perform cross-validation and find the smoothing value with the smallest cv score;
+3. Generate the time tree using the optimized smoothing value.
 
 ## Prerequisite
 * [TreePL](https://github.com/blackrim/treePL)
