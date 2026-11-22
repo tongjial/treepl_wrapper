@@ -292,7 +292,7 @@ echo "Step1: generate the prime configure file"
 
 {
 	printf 'treefile = %s\n' "$TREEFILE_ABS"
-	awk '{ print }' "$CONFIG"
+	awk '{ print }' <"$CONFIG"
 	printf 'thorough\nprime\n'
 } >"$WORKDIR/$PRIME_CONF"
 
