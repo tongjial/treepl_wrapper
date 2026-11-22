@@ -82,8 +82,8 @@ The log files are also copied back when the script fails, to help with debugging
 | --- | --- | --- |
 | `TREEPL_BIN` | `treePL` | treePL executable (name in `PATH` or a path) |
 | `TREEPL_PRIME_RUNS` | `100` | number of prime runs |
-| `TREEPL_CV_START` | `0.0001` | `cvstart` of the cross-validation |
-| `TREEPL_CV_STOP` | `10000` | `cvstop` of the cross-validation |
+| `TREEPL_CV_START` | `0.0001` | `cvstart` of the cross-validation (must be > 0) |
+| `TREEPL_CV_STOP` | `10000` | `cvstop` of the cross-validation (must be > 0) |
 | `TREEPL_KEEP_TMP` | `0` | set to `1` to keep the temporary directory (its path is printed) |
 | `TMPDIR` | `/tmp` | parent directory of the temporary directory |
 
