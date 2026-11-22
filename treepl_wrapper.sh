@@ -145,8 +145,11 @@ fi
 if ! [[ "$PRIME_RUNS" =~ ^[1-9][0-9]*$ ]]; then
 	die 1 "TREEPL_PRIME_RUNS must be a positive integer, got '$PRIME_RUNS'"
 fi
-if ! is_number "$CV_START" || ! is_number "$CV_STOP"; then
-	die 1 "TREEPL_CV_START and TREEPL_CV_STOP must be numbers, got '$CV_START' and '$CV_STOP'"
+# treePL scans smoothing values by repeated multiplication with 0.1, so a bound
+# <= 0 would never be reached and cross-validation would run forever.
+if ! is_number "$CV_START" || ! is_number "$CV_STOP" ||
+	! awk -v a="$CV_START" -v b="$CV_STOP" 'BEGIN { exit !(a > 0 && b > 0) }'; then
+	die 1 "TREEPL_CV_START and TREEPL_CV_STOP must be positive numbers, got '$CV_START' and '$CV_STOP'"
 fi
 
 if ! TREEPL_PATH="$(command -v -- "$TREEPL_BIN")"; then
