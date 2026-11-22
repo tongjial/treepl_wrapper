@@ -182,6 +182,10 @@ fi
 
 OUTDIR="$(pwd -P)"
 WORKDIR="$(mktemp -d "${TMPDIR:-/tmp}/treepl_wrapper.XXXXXX")"
+# Scratch files live in a subdirectory so they can never collide with the
+# label-derived file names (labels cannot contain '/').
+SCRATCH="$WORKDIR/scratch"
+mkdir -- "$SCRATCH"
 
 PRIME_CONF="configure_prime_$LABEL"
 PRIME_OUT="prime_$LABEL"
@@ -301,15 +305,15 @@ echo "Step2: run primes $PRIME_RUNS times"
 : >"$WORKDIR/$PRIME_OUT"
 : >"$WORKDIR/$PRIME_LOG"
 for ((run = 1; run <= PRIME_RUNS; run++)); do
-	if ! run_treepl "$PRIME_CONF" >"$WORKDIR/prime_run.out" 2>&1; then
-		cat -- "$WORKDIR/prime_run.out" >>"$WORKDIR/$PRIME_LOG"
+	if ! run_treepl "$PRIME_CONF" >"$SCRATCH/prime_run.out" 2>&1; then
+		cat -- "$SCRATCH/prime_run.out" >>"$WORKDIR/$PRIME_LOG"
 		die 4 "treePL prime failed (run $run/$PRIME_RUNS); see $PRIME_LOG"
 	fi
 	{
 		printf '=== prime run %d ===\n' "$run"
-		cat -- "$WORKDIR/prime_run.out"
+		cat -- "$SCRATCH/prime_run.out"
 	} >>"$WORKDIR/$PRIME_LOG"
-	extract_prime_line "$WORKDIR/prime_run.out" >>"$WORKDIR/$PRIME_OUT"
+	extract_prime_line "$SCRATCH/prime_run.out" >>"$WORKDIR/$PRIME_OUT"
 done
 
 echo "Step3: generate the cv configure file"
